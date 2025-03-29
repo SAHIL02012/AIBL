@@ -1,0 +1,1 @@
+export const ImageNFT= "0x24d1d96e06a8946B962cE033ceCFfde989AeA877"
