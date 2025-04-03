@@ -7,17 +7,21 @@ import {
   ListItemText, 
   IconButton, 
   Box,
-  Typography
+  Typography,
+  useTheme
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import StorageIcon from '@mui/icons-material/Storage';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const DRAWER_WIDTH = 240;
+
 const AppDrawer = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const menuItems = [
     {
@@ -40,8 +44,10 @@ const AppDrawer = () => {
           position: 'fixed',
           top: '24px',
           left: '24px',
-          zIndex: 1000,
+          zIndex: 1200,
           color: 'white',
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+          backdropFilter: 'blur(10px)',
           '&:hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
@@ -56,14 +62,21 @@ const AppDrawer = () => {
         onClose={() => setDrawerOpen(false)}
         PaperProps={{
           sx: {
-            backgroundColor: '#1e1e1e',
-            color: 'white',
-            width: 240,
+            width: DRAWER_WIDTH,
+            backgroundColor: theme.palette.background.paper,
+            backgroundImage: 'none',
+            borderRight: `1px solid ${theme.palette.divider}`,
           }
         }}
       >
-        <Box sx={{ p: 2 }}>
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: 'bold' }}>
+        <Box 
+          sx={{ 
+            p: 2,
+            background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
+            color: 'white',
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
             AIBL
           </Typography>
         </Box>
@@ -83,6 +96,9 @@ const AppDrawer = () => {
                 },
                 '&.Mui-selected': {
                   backgroundColor: 'rgba(144, 202, 249, 0.1)',
+                  '&:hover': {
+                    backgroundColor: 'rgba(144, 202, 249, 0.2)',
+                  },
                 },
               }}
             >

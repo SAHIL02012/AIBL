@@ -274,274 +274,275 @@ function MainContent() {
   };
   
   return (
-    <Box 
-      className="app"
-      sx={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #121212 0%, #1e1e1e 100%)',
-        padding: '2rem',
-        color: 'white',
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      {/* Connect Wallet Button */}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={connectWallet}
-        sx={{
-          position: 'fixed',
-          top: '24px',
-          right: '24px',
-          background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
-          boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
-          '&:hover': {
-            background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
-          },
-          zIndex: 1000,
-        }}
-      >
-        {walletAddress ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
-      </Button>
-
-      <Typography 
-        variant="h4" 
-        component="h1" 
-        className="header"
-        sx={{
-          textAlign: 'center',
-          marginTop: '2rem',
-          marginBottom: '3rem',
-          background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          fontWeight: 'bold',
-          fontSize: { xs: '2rem', md: '2.5rem' },
-        }}
-      >
-        <p>AIBL <br/>
-        (Where AI's creativity meets Blockchain security)</p>
-      </Typography>
-
-      {/* Text Box */}
-      <Box 
-        sx={{ 
-          display: 'flex', 
-          gap: '1rem', 
-          justifyContent: 'center', 
-          marginBottom: '3rem',
-          width: '100%',
-          maxWidth: '800px',
-          position: 'relative',
-        }}
-      >
-        <TextField
-          variant="outlined"
-          placeholder="Write a Prompt to generate an image"
-          className="textBox"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          sx={{
-            width: '70%',
-            '& .MuiOutlinedInput-root': {
-              '&:hover fieldset': {
-                borderColor: '#90caf9',
-              },
-            },
-          }}
-        />
-        <Button 
-          variant="contained" 
-          onClick={handleGenerateClick}
-          sx={{
-            background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
-            boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
-            },
-            minWidth: '120px',
-          }}
-        >
-          Generate
-        </Button>
-      </Box>
-
-      {/* Main Content Area */}
-      <Box 
-        sx={{
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'flex',
-          flexDirection: { xs: 'column', md: 'row' },
-          gap: '2rem',
-          alignItems: 'flex-start',
-        }}
-      >
-        {/* Left Section: Image */}
-        <Box 
-          sx={{
-            flex: { xs: '1', md: '1' },
-            width: '100%',
-            maxWidth: { xs: '100%', md: '500px' },
-            position: 'sticky',
-            top: '100px',
-          }}
-        >
-          {generatedImage ? (
-            <img 
-              src={generatedImage} 
-              alt="Generated" 
-              style={{ 
-                width: '100%', 
-                height: 'auto',
-                borderRadius: '12px',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
-              }} 
-            />
-          ) : (
-            <Typography 
-              variant="body1" 
-              color="textSecondary" 
-              textAlign="center"
-              sx={{
-                padding: '2rem',
-                background: 'rgba(0, 0, 0, 0.2)',
-                borderRadius: '12px',
-                minHeight: '300px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              Your image will be displayed here
-            </Typography>
-          )}
-        </Box>
-
-        {/* Right Section: Text Fields */}
-        <Box 
-          sx={{
-            flex: { xs: '1', md: '2' },
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5rem',
-            background: 'rgba(30, 30, 30, 0.5)',
-            borderRadius: '16px',
-            padding: '2rem',
-            backdropFilter: 'blur(10px)',
-            width: '100%',
-          }}
-        >
-          <TextField
-            label="Image Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            variant="outlined"
-            fullWidth
-          />
-          <TextField
-            label="Prompt/Description"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={4}
-          />
-          <TextField
-            label="CID (IPFS Hash)"
-            value={cid}
-            variant="outlined"
-            fullWidth
-            disabled
-          />
-        </Box>
-      </Box>
-
-      {/* Footer Buttons */}
-      <Box 
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '1rem',
-          marginTop: '3rem',
-          width: '100%',
-          maxWidth: '800px',
-          flexWrap: 'wrap',
-        }}
-      >
-        <Button 
-          variant="contained" 
-          color="secondary" 
-          onClick={handleDownloadImage}
-          sx={{
-            background: 'linear-gradient(45deg, #f48fb1 30%, #f06292 90%)',
-            boxShadow: '0 3px 5px 2px rgba(244, 143, 177, .3)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #f06292 30%, #ec407a 90%)',
-            },
-            minWidth: '150px',
-          }}
-        >
-          Download
-        </Button>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={handleUploadToPinata}
-          sx={{
-            background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
-            boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
-            },
-            minWidth: '150px',
-          }}
-        >
-          Upload to Pinata
-        </Button>
-        <Button 
-          variant="contained" 
-          color="success" 
-          onClick={mintNFT}
-          sx={{
-            background: 'linear-gradient(45deg, #81c784 30%, #4caf50 90%)',
-            boxShadow: '0 3px 5px 2px rgba(76, 175, 80, .3)',
-            '&:hover': {
-              background: 'linear-gradient(45deg, #4caf50 30%, #388e3c 90%)',
-            },
-            minWidth: '150px',
-          }}
-        >
-          Mint NFT
-        </Button>
-      </Box>
-    </Box>
-  );
-}
-
-function AppContent() {
-  return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <AppDrawer />
-      <Routes>
-        <Route path="/" element={<MainContent />} />
-        <Route path="/ipfs" element={<IPFSPage />} />
-      </Routes>
+      <Box 
+        className="app"
+        sx={{
+          minHeight: '100vh',
+          background: 'linear-gradient(135deg, #121212 0%, #1e1e1e 100%)',
+          padding: '2rem',
+          color: 'white',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {/* Connect Wallet Button */}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={connectWallet}
+          sx={{
+            position: 'fixed',
+            top: '24px',
+            right: '24px',
+            background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
+            boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+            '&:hover': {
+              background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
+            },
+            zIndex: 1000,
+          }}
+        >
+          {walletAddress ? `Connected: ${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
+        </Button>
+
+        <Typography 
+          variant="h4" 
+          component="h1" 
+          className="header"
+          sx={{
+            textAlign: 'center',
+            marginTop: '2rem',
+            marginBottom: '3rem',
+            background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            fontWeight: 'bold',
+            fontSize: { xs: '2rem', md: '2.5rem' },
+          }}
+        >
+          <p>AIBL <br/>
+          (Where AI's creativity meets Blockchain security)</p>
+        </Typography>
+
+        {/* Text Box */}
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            gap: '1rem', 
+            justifyContent: 'center', 
+            marginBottom: '3rem',
+            width: '100%',
+            maxWidth: '800px',
+            position: 'relative',
+          }}
+        >
+          <TextField
+            variant="outlined"
+            placeholder="Write a Prompt to generate an image"
+            className="textBox"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            sx={{
+              width: '70%',
+              '& .MuiOutlinedInput-root': {
+                '&:hover fieldset': {
+                  borderColor: '#90caf9',
+                },
+              },
+            }}
+          />
+          <Button 
+            variant="contained" 
+            onClick={handleGenerateClick}
+            sx={{
+              background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
+              boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
+              },
+              minWidth: '120px',
+            }}
+          >
+            Generate
+          </Button>
+        </Box>
+
+        {/* Main Content Area */}
+        <Box 
+          sx={{
+            width: '100%',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: '2rem',
+            alignItems: 'flex-start',
+          }}
+        >
+          {/* Left Section: Image */}
+          <Box 
+            sx={{
+              flex: { xs: '1', md: '1' },
+              width: '100%',
+              maxWidth: { xs: '100%', md: '500px' },
+              position: 'sticky',
+              top: '100px',
+            }}
+          >
+            {generatedImage ? (
+              <img 
+                src={generatedImage} 
+                alt="Generated" 
+                style={{ 
+                  width: '100%', 
+                  height: 'auto',
+                  borderRadius: '12px',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
+                }} 
+              />
+            ) : (
+              <Typography 
+                variant="body1" 
+                color="textSecondary" 
+                textAlign="center"
+                sx={{
+                  padding: '2rem',
+                  background: 'rgba(0, 0, 0, 0.2)',
+                  borderRadius: '12px',
+                  minHeight: '300px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                Your image will be displayed here
+              </Typography>
+            )}
+          </Box>
+
+          {/* Right Section: Text Fields */}
+          <Box 
+            sx={{
+              flex: { xs: '1', md: '2' },
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              background: 'rgba(30, 30, 30, 0.5)',
+              borderRadius: '16px',
+              padding: '2rem',
+              backdropFilter: 'blur(10px)',
+              width: '100%',
+            }}
+          >
+            <TextField
+              label="Image Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              label="Prompt/Description"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
+            />
+            <TextField
+              label="CID (IPFS Hash)"
+              value={cid}
+              variant="outlined"
+              fullWidth
+              disabled
+            />
+          </Box>
+        </Box>
+
+        {/* Footer Buttons */}
+        <Box 
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1rem',
+            marginTop: '3rem',
+            width: '100%',
+            maxWidth: '800px',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            onClick={handleDownloadImage}
+            sx={{
+              background: 'linear-gradient(45deg, #f48fb1 30%, #f06292 90%)',
+              boxShadow: '0 3px 5px 2px rgba(244, 143, 177, .3)',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #f06292 30%, #ec407a 90%)',
+              },
+              minWidth: '150px',
+            }}
+          >
+            Download
+          </Button>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            onClick={handleUploadToPinata}
+            sx={{
+              background: 'linear-gradient(45deg, #90caf9 30%, #64b5f6 90%)',
+              boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #64b5f6 30%, #42a5f5 90%)',
+              },
+              minWidth: '150px',
+            }}
+          >
+            Upload to Pinata
+          </Button>
+          <Button 
+            variant="contained" 
+            color="success" 
+            onClick={mintNFT}
+            sx={{
+              background: 'linear-gradient(45deg, #81c784 30%, #4caf50 90%)',
+              boxShadow: '0 3px 5px 2px rgba(76, 175, 80, .3)',
+              '&:hover': {
+                background: 'linear-gradient(45deg, #4caf50 30%, #388e3c 90%)',
+              },
+              minWidth: '150px',
+            }}
+          >
+            Mint NFT
+          </Button>
+        </Box>
+      </Box>
     </ThemeProvider>
   );
 }
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Router>
+        <Box sx={{ display: 'flex' }}>
+          <AppDrawer />
+          <Box component="main" sx={{ flexGrow: 1 }}>
+            <Routes>
+              <Route path="/" element={<MainContent />} />
+              <Route path="/ipfs" element={<IPFSPage />} />
+            </Routes>
+          </Box>
+        </Box>
+      </Router>
+    </ThemeProvider>
   );
 }
 
