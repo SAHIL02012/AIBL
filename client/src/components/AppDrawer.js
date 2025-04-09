@@ -13,6 +13,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import StorageIcon from '@mui/icons-material/Storage';
+import TokenIcon from '@mui/icons-material/Token';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const DRAWER_WIDTH = 240;
@@ -33,6 +34,11 @@ const AppDrawer = () => {
       text: 'IPFS',
       icon: <StorageIcon />,
       path: '/ipfs'
+    },
+    {
+      text: 'Mint NFT',
+      icon: <TokenIcon />,
+      path: '/mint'
     }
   ];
 

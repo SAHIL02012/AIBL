@@ -7,6 +7,7 @@ import imagesmint from './ImageNFT.json'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppDrawer from './components/AppDrawer';
 import IPFSPage from './pages/IPFSPage';
+import MintNFTPage from './pages/MintNFTPage';
 const { ethers, Result } = require("ethers");   
 
 // Create dark theme
@@ -538,6 +539,7 @@ function App() {
             <Routes>
               <Route path="/" element={<MainContent />} />
               <Route path="/ipfs" element={<IPFSPage />} />
+              <Route path="/mint" element={<MintNFTPage />} />
             </Routes>
           </Box>
         </Box>
