@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import StorageIcon from '@mui/icons-material/Storage';
 import TokenIcon from '@mui/icons-material/Token';
+import ImageIcon from '@mui/icons-material/Image';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const DRAWER_WIDTH = 240;
@@ -29,6 +30,11 @@ const AppDrawer = () => {
       text: 'AI + NFT',
       icon: <AutoAwesomeIcon />,
       path: '/'
+    },
+    {
+      text: 'AI Image Editor',
+      icon: <ImageIcon />,
+      path: '/ai-upload'
     },
     {
       text: 'IPFS',

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppDrawer from './components/AppDrawer';
 import IPFSPage from './pages/IPFSPage';
 import MintNFTPage from './pages/MintNFTPage';
+import AIUploadPage from './pages/AIUploadPage';
 const { ethers, Result } = require("ethers");   
 
 // Create dark theme
@@ -540,6 +541,7 @@ function App() {
               <Route path="/" element={<MainContent />} />
               <Route path="/ipfs" element={<IPFSPage />} />
               <Route path="/mint" element={<MintNFTPage />} />
+              <Route path="/ai-upload" element={<AIUploadPage />} />
             </Routes>
           </Box>
         </Box>
